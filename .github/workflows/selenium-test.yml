@@ -1,0 +1,44 @@
+name: Rohit Selenium SignUp Test
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  selenium-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Code download karo GitHub se
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Java 11 setup karo
+      - name: Java 11 setup
+        uses: actions/setup-java@v4
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+
+      # Step 3: Google Chrome install karo
+      - name: Chrome install
+        uses: browser-actions/setup-chrome@v1
+
+      # Step 4: Maven dependencies cache karo (baar baar download nahi hoga)
+      - name: Maven cache
+        uses: actions/cache@v4
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      # Step 5: Code compile karo
+      - name: Compile karo
+        run: mvn compile
+
+      # Step 6: Selenium test run karo
+      - name: Selenium test chalao
+        run: mvn exec:java -Dexec.mainClass="RohitShatty_SignUp"
