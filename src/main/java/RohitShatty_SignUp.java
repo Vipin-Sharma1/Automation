@@ -10,10 +10,10 @@ import java.time.Duration;
 public class RohitShatty_SignUp {
     public static void main(String[] args) {
 
-        // WebDriverManager automatically ChromeDriver handle karta hai
+        
         WebDriverManager.chromedriver().setup();
 
-        // GitHub Actions ke liye headless mode ZAROORI hai
+  
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--headless");
         options.addArguments("--no-sandbox");
@@ -25,35 +25,35 @@ public class RohitShatty_SignUp {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
 
         try {
-            // Website open karo
+          
             driver.get("https://rahulshettyacademy.com/locatorspractice/");
             System.out.println("Website khul gayi: " + driver.getTitle());
 
-            // Username type karo
+            //Enter Username
             wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("inputUsername")))
-                .sendKeys("komal");
+                .sendKeys("Alice");
             System.out.println("Username enter kiya");
 
-            // Password type karo
+            // Enter Password 
             driver.findElement(By.name("inputPassword")).sendKeys("123456");
             System.out.println("Password enter kiya");
 
-            // Forgot password link click karo
+            // Forgot password link click 
             driver.findElement(By.linkText("Forgot your password?")).click();
             System.out.println("Forgot password click kiya");
 
-            // Naya form aayega - Name bhar do
+            // New form filling
             wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//input[@type='text']")))
-                .sendKeys("jamali sahab");
+                .sendKeys("BOB");
             System.out.println("Name enter kiya");
 
-            // Email bhar do
+            // Enter Email
             driver.findElement(By.xpath("//input[@placeholder='Email']"))
                 .sendKeys("vipin@gmail.com");
             System.out.println("Email enter kiya");
 
-            // Phone number bhar do
+            // Enter Phone number 
             driver.findElement(By.xpath("//input[@placeholder='Phone Number']"))
                 .sendKeys("63500");
             System.out.println("Phone enter kiya");
